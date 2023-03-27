@@ -126,18 +126,9 @@ When cloning the file  "airflow-values.yaml" it is important that when you chang
 
 ***IMPORTANT***: This process might take around 5 minutes to execute, **be patient please**.
 
-17. Verify that the pods are up and running:
-    ```bash
-    $ kubectl get pods -n airflow
-    ```
-    If one of the PODS does not work correctly, it must be deleted so that it is automatically regenerated, for this we use the following command:
 
-    ```bash
-    $ kubectl delete pod <name pod> --force --grace-period=0 --namespace airflow
-    ```
-    **Note:** we replace `<name pod>` with the name of the pod we want to replace.
 
-18. Access the Airflow dashboard with what the Helm chart provided:
+17. Access the Airflow dashboard with what the Helm chart provided:
     ```bash
     Your release is named airflow.
     You can now access your dashboard(s) by executing the following command(s) and visiting the corresponding port at localhost in your browser:
@@ -153,16 +144,31 @@ When cloning the file  "airflow-values.yaml" it is important that when you chang
     ```
     **Note:** Sometimes there's an error when doing the kubectl portforward. If all of the pods are running, we might
     just need to keep trying.
-19. Execute the Airflow Webserver commit:
+18. Execute the Airflow Webserver commit:
 ```bash
 kubectl port-forward svc/airflow-webserver 8080:8080 --namespace
 ```
 Once in `localhost:8080`, you should see the Airflow login.
-![Airflow Login](./imgs/airflow-login.png "Airflow Login")
 
-20. After logging in with your credentials (username and password from webserver in step 18), you should see the Airflow
+![Airflow Login](imgs\Screenshot_13.png "Airflow Login")
+
+19. After logging in with your credentials (username and password from webserver in step 18), you should see the Airflow
 dashboard.
-![Airflow Dashboard](./imgs/airflow-dag-dashboard.png "Airflow Dashboard")
+
+![Airflow Dashboard](imgs\Screenshot_14.png "Airflow Dashboard")
+
+20. To verify that the PODS are working correctly, open another terminal and execute the following command::
+    ```bash
+    $ kubectl get pods -n airflow
+    ```
+![Airflow Pods](imgs\Screenshot_15.png "Airflow Pods")
+
+If one of the PODS does not work correctly, it must be deleted so that it is automatically regenerated, for this we use the following command:
+
+```bash
+    $ kubectl delete pod <name pod> --force --grace-period=0 --namespace airflow
+```
+**Note:** we replace `<name pod>` with the name of the pod we want to replace.
 
 21. It is important to stop and ***destroy the platform*** that has been created when you are no longer using it to avoid additional costs!
 - We stop with the commands `ctrl + c`
