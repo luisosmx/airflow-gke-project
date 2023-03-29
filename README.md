@@ -146,7 +146,7 @@ When cloning the file  "airflow-values.yaml" it is important that when you chang
     just need to keep trying.
 18. Execute the Airflow Webserver commit:
 ```bash
-kubectl port-forward svc/airflow-webserver 8080:8080 --namespace
+kubectl port-forward svc/airflow-webserver 8080:8080 --namespace airflow
 ```
 Once in `localhost:8080`, you should see the Airflow login.
 
