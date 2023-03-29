@@ -16,7 +16,7 @@ def run_gcf():
   response_text = response.text
   print(response_text)
 
-dag = DAG('simple-etl-gcf', description='Simple ETL GCF',
+dag = DAG('simple-etl-gcf', description='Simple ETL GCF!',
           schedule_interval=None,
           start_date=datetime(2023, 3, 29), catchup=False)
 
